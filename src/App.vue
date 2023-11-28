@@ -103,7 +103,7 @@ export default {
 /* Container styles */
 .todo-container {
   max-width: 800px;
-  height: 100vh;
+  height: auto;
   margin: 0 auto;
   font-family: 'Arial', sans-serif;
   color: #333;
