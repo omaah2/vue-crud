@@ -7,15 +7,15 @@
     <!-- Read section -->
     <div v-if="currentView === 'read'" class="todo-read">
       <div class="add-todo-section">
-      <input type="text" v-model="newTodo" placeholder="Enter new todo" class="input-field">
-      <button @click="addTodo" class="btn-add">Add Todo</button>
-    </div>
+        <input type="text" v-model="newTodo" placeholder="Enter new todo" class="input-field">
+        <button @click="addTodo" class="btn-add">Add Todo</button>
+      </div>
       <h2 class="section-title">Todos List</h2>
       <ul class="todo-list">
         <li v-for="(todo, index) in todos" :key="index" class="todo-item">
           {{ todo }}
           <button @click="editTodo(index)" class="btn-edit">Edit</button>
-          <button @click="deleteTodo(index)" class="btn-delete">Delete</button>
+          <button @click="confirmDelete(index)" class="btn-delete">Delete</button>
         </li>
       </ul>
     </div>
@@ -34,15 +34,12 @@
       <button @click="updateTodo" class="btn-update">Update Todo</button>
     </div>
 
-    <!-- Delete section -->
-    <div v-if="currentView === 'delete'" class="todo-delete">
-      <h2 class="section-title">Delete Todo</h2>
-      <ul class="todo-list">
-        <li v-for="(todo, index) in todos" :key="index" class="todo-item">
-          {{ todo }}
-          <button @click="confirmDelete(index)" class="btn-delete">Delete</button>
-        </li>
-      </ul>
+    <!-- Delete confirmation dialog -->
+    <div v-if="currentView === 'confirmDelete'" class="todo-delete-confirm">
+      <h2 class="section-title">Confirm Delete</h2>
+      <p>Are you sure you want to delete this todo?</p>
+      <button @click="deleteTodo" class="btn-delete-confirm">Yes, Delete</button>
+      <button @click="cancelDelete" class="btn-cancel-delete">Cancel</button>
     </div>
   </div>
 </template>
@@ -84,14 +81,18 @@ export default {
       }
     },
     // Method to delete a todo
-    deleteTodo(index) {
-      this.todos.splice(index, 1);
+    deleteTodo() {
+      this.todos.splice(this.deleteIndex, 1);
       this.currentView = 'read';
     },
     // Method to confirm delete
     confirmDelete(index) {
       this.deleteIndex = index;
-      this.currentView = 'delete';
+      this.currentView = 'confirmDelete';
+    },
+    // Method to cancel delete
+    cancelDelete() {
+      this.currentView = 'read';
     },
   },
 };
@@ -192,6 +193,16 @@ export default {
 }
 .btn-delete {
   background-color: #c0392b;
+}
+.btn-delete-confirm,
+.btn-cancel-delete{
+  background-color: #3498db;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+  border: none;
+  box-shadow: none;
+  padding: 8px 16px;
+  margin-right: 10px;
 }
 .btn-edit {
   background-color: #2980b9;
