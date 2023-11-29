@@ -1,4 +1,29 @@
-# vue-crud
+# Vue.js Todo App 📝✅
+
+This Vue.js Todo App is a simple application that allows you to manage your tasks. You can create, read, update, and delete todos.
+
+## Technologies Used 🚀
+
+- Vue.js
+- Vue Router
+
+## Features ✨
+
+- Create new todos
+- View a list of todos
+- Update existing todos
+- Delete todos
+
+## Getting Started 🛠️
+
+### Prerequisites
+
+- Node.js (and npm or yarn)
+
+### Installation
+
+
+
 
 ## Project setup
 ```
